@@ -1,4 +1,4 @@
-import React, {memo, useEffect, useState} from "react";
+import React, {memo, useEffect, useRef, useState} from "react";
 
 
 const App = memo( () => {
@@ -10,6 +10,9 @@ const App = memo( () => {
         password: ''
     });
 
+    const ref = useRef();
+    const divRef = useRef();
+
     const handleUserData = (event) => {
         setUser((prevState => ({
             ...prevState,
@@ -19,12 +22,26 @@ const App = memo( () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(user, 'user')
+        const formElement = ref.current;
+        if(formElement) {
+            const firstInput = formElement.querySelector('[name = firstName]')
+            console.log(firstInput, 'firstInput')
+        }
+        /*console.log(user, 'user')*/
+        console.log(ref.current.value, 'ref')
     }
+
+
+
 
     return (
         <div className="App">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} ref={ref}>
+                <div ref={divRef} contentEditable suppressContentEditableWarning >
+                    <p >
+
+                    </p>
+                </div>
                 <input type="text" name='firstName' value={user.firstName} onChange={handleUserData}/>
                 <input type="text" name='lastName' value={user.lastName} onChange={handleUserData}/>
                 <input type="email" name='email' value={user.email} onChange={handleUserData}/>
