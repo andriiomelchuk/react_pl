@@ -1,43 +1,42 @@
-import React, {useEffect} from "react";
-import Button from '@mui/material/Button';
-import Child from "./Child";
-import {useState} from "react";
+import React, {memo, useEffect, useState} from "react";
 
-const App = () => {
 
-    const [data, setData] = useState({
-        name: 'Bob'
+const App = memo( () => {
+
+    const [user, setUser] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
     });
 
-    useEffect(() => {
-
-    }, [data.name])
-
-    const [loading, setLoading] = useState(false);
-
-    const changeName = () => {
-        setData(prevState => ({
+    const handleUserData = (event) => {
+        setUser((prevState => ({
             ...prevState,
-            name: 'Lora'
-        }))
+            [event.target.name]: event.target.value
+        })))
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(user, 'user')
     }
 
     return (
         <div className="App">
-            <header className="App-header">
+            <form onSubmit={handleSubmit}>
+                <input type="text" name='firstName' value={user.firstName} onChange={handleUserData}/>
+                <input type="text" name='lastName' value={user.lastName} onChange={handleUserData}/>
+                <input type="email" name='email' value={user.email} onChange={handleUserData}/>
+                <input type="password" name='password' value={user.password} onChange={handleUserData}/>
+                <button type='submit'>Send</button>
+            </form>
 
-                <p>
-                    {data.name}
-                </p>
 
-            </header>
-            <button onClick={() => setLoading(!loading)}>Open & Close</button>
-            <Button  variant="contained" onClick={changeName}>Change name</Button >
-            {loading ? <Child name={data.name}/> : null}
 
         </div>
     );
-}
+})
 
 export default App;
 
