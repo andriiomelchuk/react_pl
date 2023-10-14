@@ -37,8 +37,8 @@ const App = memo( () => {
     return (
         <div className="App">
             <form onSubmit={handleSubmit} ref={ref}>
-                <div ref={divRef} contentEditable suppressContentEditableWarning >
-                    <p >
+                <div ref={divRef}  suppressContentEditableWarning >
+                    <p contentEditable>
 
                     </p>
                 </div>
