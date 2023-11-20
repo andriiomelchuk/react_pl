@@ -1,6 +1,6 @@
 
 import PlayerInput from "../../Components/PlayerInput/PlayerInput";
-import PlayerPreview from "../../Components/PlayerPreview/PlayerPreview";
+import PlayerPreview from "./PlayerPreview";
 import {useCallback, useState} from "react";
 import {Link} from "react-router-dom";
 
